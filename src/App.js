@@ -1,23 +1,75 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import "./App.css";
+import { ButtonAdd } from "./components/ButtonAdd/ButtonAdd";
+import { Item } from "./components/Item/Item";
+
+const initialList = [
+  {
+    text: "test",
+    finished: false,
+  },
+  {
+    text: "test 2",
+    finished: true,
+  },
+];
 
 function App() {
+  const [list, setList] = React.useState(initialList);
+
+  function checkItem(targetIndex) {
+    const newList = list.map((item, index) => {
+      if (index !== targetIndex) {
+        return item;
+      }
+      return {
+        ...item,
+        finished: !item.finished,
+      };
+    });
+
+    setList(newList);
+  }
+
+  function createNewItem() {
+    setList([...list, { text: "", finished: false }]);
+  }
+
+  function updateItem(targetIndex, value) {
+    const newList = list.map((item, index) => {
+      if (index !== targetIndex) {
+        return item;
+      }
+      return {
+        ...item,
+        text: value,
+      };
+    });
+
+    setList(newList);
+  }
+
+  function remove(targetIndex) {
+    const newList = list.filter((item, index) => {
+      return index !== targetIndex;
+    });
+
+    setList(newList);
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="root">
+      {list.map((item, index) => (
+        <Item
+          key={index}
+          onChange={updateItem}
+          index={index}
+          onCheck={checkItem}
+          item={item}
+          onRemove={remove}
+        />
+      ))}
+      <ButtonAdd onClick={createNewItem} />
     </div>
   );
 }

@@ -1,0 +1,19 @@
+.button-add {
+    background-color: #47E094;
+    border: 0;
+    color: #3BB27A;
+    font-size: 60px;
+    width: 80px;
+    height: 80px;
+    border-radius: 100%;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translate(-40px, 40px);
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.button-add:hover {
+    color: #000;
+}
