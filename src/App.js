@@ -6,11 +6,35 @@ import { Item } from "./components/Item/Item";
 
 const initialList = [
   {
-    text: "test",
+    text: "1. Advanced Javascript",
     finished: false,
   },
   {
-    text: "test 2",
+    text: "2. React.js",
+    finished: false,
+  },
+  {
+    text: "3. Redux",
+    finished: false,
+  },
+  {
+    text: "4. Internship and get a job in Kuehne+Nagel",
+    finished: false,
+  },
+  {
+    text: "Bootstrap",
+    finished: true,
+  },
+  {
+    text: "Basic Javascript",
+    finished: true,
+  },
+  {
+    text: "CSS",
+    finished: true,
+  },
+  {
+    text: "HTML",
     finished: true,
   },
 ];
@@ -61,16 +85,18 @@ function App() {
   return (
     <div className="root">
       <CurrentDate />
-      {list.map((item, index) => (
-        <Item
-          key={index}
-          onChange={updateItem}
-          index={index}
-          onCheck={checkItem}
-          item={item}
-          onRemove={remove}
-        />
-      ))}
+      {list
+        .sort((item) => (item.finished ? 1 : -1))
+        .map((item, index) => (
+          <Item
+            key={index}
+            onChange={updateItem}
+            index={index}
+            onCheck={checkItem}
+            item={item}
+            onRemove={remove}
+          />
+        ))}
       <ButtonAdd onClick={createNewItem} />
     </div>
   );
