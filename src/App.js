@@ -1,6 +1,7 @@
 import React from "react";
 import "./App.css";
 import { ButtonAdd } from "./components/ButtonAdd/ButtonAdd";
+import { CurrentDate } from "./components/Date/Date";
 import { Item } from "./components/Item/Item";
 
 const initialList = [
@@ -59,6 +60,7 @@ function App() {
 
   return (
     <div className="root">
+      <CurrentDate />
       {list.map((item, index) => (
         <Item
           key={index}
